@@ -13,7 +13,7 @@ echo "=> Creating riak user with ${_word} password"
 # Enable security for use authentication user and create user with random password
 riak-admin security enable
 riak-admin security add-user riakuser password=$PASS
-riak-admin security grant riak_kv.get,riak_kv.put,riak_kv.delete,riak_kv.index,riak_kv.list_keys,riak_kv.list_buckets on any to riakuser
+riak-admin security grant riak_core.set_bucket,riak_kv.get,riak_kv.put,riak_kv.delete,riak_kv.index,riak_kv.list_keys,riak_kv.list_buckets on any to riakuser
 riak-admin security add-source all 0.0.0.0/0 password
 
 echo "=> Done!"
