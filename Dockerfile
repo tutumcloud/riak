@@ -15,8 +15,6 @@ RUN apt-get update && apt-get install riak
 # Riak's config 
 ENV RIAK_NODE_NAME "127.0.0.1"
 ADD ./app.config /etc/riak/app.config
-RUN sed -i -e s/riak_kv_bitcask_backend/riak_kv_eleveldb_backend/g /etc/riak/app.config
-RUN sed -i -e 0,/"enabled, false"/{s/"enabled, false"/"enabled, true"/} /etc/riak/app.config
 RUN sed -i -e s/listener.http.internal/listener.https.internal/g /etc/riak/riak.conf
 
 # Copy init script to make configuration after first run and password set
