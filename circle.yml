@@ -1,0 +1,10 @@
+machine:
+  services:
+    - docker
+dependencies:
+  override:
+    - docker build -t riak .
+test:
+  override:
+    - docker run -d -p 8098:8098 -e RIAK_PASS="mypass" riak; sleep 30
+    - wget --no-check-certificate -qO- https://riakuser:mypass@localhost:8098/ping
