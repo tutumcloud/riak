@@ -2,7 +2,6 @@ FROM ubuntu:trusty
 MAINTAINER Israel Gayoso igayoso@gmail.com 
 
 # Update the APT cache, add basho's repository and install packages
-ENV DEBIAN_FRONTEND noninteractive
 RUN sed -i.bak 's/main$/main universe/' /etc/apt/sources.list
 RUN apt-get update && \
   apt-get install -y apt-transport-https openssl pwgen
