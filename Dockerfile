@@ -20,6 +20,8 @@ ADD ./run.sh /run.sh
 ADD ./set_riak_password.sh /set_riak_password.sh
 ADD ./create_certificate.sh /create_certificate.sh
 
+ADD supervisord-riak.conf /etc/supervisor/conf.d/supervisord-riak.conf
+
 # Expose protocol buffers and HTTPS
 EXPOSE 8087 8098
 
