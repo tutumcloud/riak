@@ -1,16 +1,14 @@
-FROM ubuntu:trusty
+FROM tutum/curl:trusty
 MAINTAINER Israel Gayoso igayoso@gmail.com 
 
-# Update the APT cache, add basho's repository and install packages
-RUN sed -i.bak 's/main$/main universe/' /etc/apt/sources.list
-RUN apt-get update && \
-  apt-get install -y apt-transport-https openssl pwgen
+RUN curl https://packagecloud.io/gpg.key | apt-key add -
+RUN apt-get update
+RUN apt-get install -y apt-transport-https supervisor openssl pwgen
+RUN echo "deb https://packagecloud.io/basho/riak/ubuntu/ trusty main" >> /etc/apt/sources.list.d/basho.list
+RUN echo "deb-src https://packagecloud.io/basho/riak/ubuntu/ trusty main" >> /etc/apt/sources.list.d/basho.list
 
-# Add riak's repository and install
-ADD ./basho.apt.key /tmp/basho.apt.key
-RUN apt-key add /tmp/basho.apt.key && rm /tmp/basho.apt.key
-RUN echo "deb https://packagecloud.io/basho/riak/ubuntu/ trusty main" > /etc/apt/sources.list.d/basho.list
-RUN apt-get update && apt-get install riak
+RUN apt-get update
+RUN apt-get install -y riak
 
 # Riak's config 
 ENV RIAK_NODE_NAME "127.0.0.1"
