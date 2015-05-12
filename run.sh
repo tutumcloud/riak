@@ -16,6 +16,7 @@ if [ ! -f /.riak_password_set ]; then
 fi
 
 # Print riak logs to stdout
+touch /var/log/riak/{console,crash,error}.log
 tail -F /var/log/riak/*.log &
 
 fg %1
